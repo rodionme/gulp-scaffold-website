@@ -1,0 +1,10 @@
+* {
+	@include box-sizing(border-box);
+}
+
+@import "_boilerplate";
+@import "_normalize";
+
+@import "_variables";
+
+/* Write css and import files here */

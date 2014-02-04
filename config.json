@@ -1,0 +1,27 @@
+{
+	"build" : {
+		"src" : {
+			"html"      : ["./dev/jade/*.jade", "!./dev/jade/_*.jade"],
+			"css"       : "./dev/sass/main.scss",
+			"js"        : ["./dev/js/**/*.js", "!./dev/js/vendor/**/*.js"],
+			"js_vendor" : "./dev/js/vendor/**/*.js",
+			"img"       : "./dev/img/**/*",
+			"fonts"     : "./dev/fonts/**/*"
+		},
+		"dest" : {
+			"css"   : "www/css",
+			"html"  : "www/",
+			"js"    : "www/js",
+			"img"   : "www/img",
+			"fonts" : "www/fonts"
+		}
+	},
+	"watch" : {
+		"scss"      : "dev/sass/**/*.scss",
+		"jade"      : "dev/jade/**/*.jade",
+		"js"        : "dev/js/**/*.js",
+		"js_vendor" : "dev/js/vendor/**/*.js",
+		"img"       : "dev/img/**/*",
+		"fonts"     : "dev/fonts/**/*"
+	}
+}

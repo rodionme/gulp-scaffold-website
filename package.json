@@ -1,0 +1,22 @@
+{
+  "name": "gulp-scaffold-website",
+  "version": "0.0.1",
+  "description": "gulp-scaffold-website",
+  "main": "index.html",
+  "author": "Rodion Mescheryakov",
+  "license": "none",
+  "devDependencies": {
+    "gulp-livereload": "~0.2.0",
+    "tiny-lr": "~0.0.5",
+    "gulp": "~3.3.1",
+    "gulp-compass": "~1.0.8",
+    "connect": "~2.12.0",
+    "gulp-csso": "~0.1.7",
+    "gulp-jade": "~0.3.0",
+    "gulp-imagemin": "~0.1.4",
+    "connect-livereload": "~0.3.2",
+    "gulp-uglify": "~0.1.0",
+    "gulp-concat": "~2.1.7",
+    "gulp-rename": "~0.2.2"
+  }
+}
