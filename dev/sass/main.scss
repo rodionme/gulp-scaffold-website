@@ -4,9 +4,45 @@
 	@include box-sizing(border-box);
 }
 
-@import "source/boilerplate";
-@import "source/normalize";
+@import "boilerplate";
+@import "normalize";
 
-@import "source/variables";
+@import "variables";
 
-/* Write css and import files here */
+
+// GENERAL
+
+body {
+	font-size: $base-font-size;
+	-webkit-touch-callout: none;     /* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust: none;  /* prevent webkit from resizing text to fit */
+	-webkit-user-select: none;       /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+.page-container:not(.active) {
+	display: none;
+}
+
+// SPINNER
+
+.spinner-container {
+	display: none;
+	z-index: 5;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, .8);
+
+	.spinner {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: em(50px);
+		height: em(50px);
+		margin: em(-50px / 2) 0 0 em(-50px / 2);
+		background: url('../img/spinner.gif') no-repeat;
+		background-size: cover;
+	}
+}
