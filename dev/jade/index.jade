@@ -6,12 +6,13 @@ head
 	meta(name='description', content='')
 	meta(name='viewport', content='width=device-width, initial-scale=1')
 	//- TODO : Place favicon.ico and apple-touch-icon.png in the root directory
-	block css
-		link(rel='stylesheet', href='css/main.css')
-	| <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	link(rel='stylesheet', href='css/main.css')
+	//[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]
 body
 	block main
-		p Hello world! This is HTML5 Boilerplate.
+		section#start.page-container(src="pages/start.html")
+
+		include parts/_spinner
 
 	block bottom-script
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')

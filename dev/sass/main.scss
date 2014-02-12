@@ -1,10 +1,12 @@
+@import "compass/css3/box-sizing";
+
 * {
 	@include box-sizing(border-box);
 }
 
-@import "_boilerplate";
-@import "_normalize";
+@import "source/boilerplate";
+@import "source/normalize";
 
-@import "_variables";
+@import "source/variables";
 
 /* Write css and import files here */

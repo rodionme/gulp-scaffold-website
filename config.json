@@ -1,8 +1,8 @@
 {
 	"build" : {
 		"src" : {
-			"html"      : ["./dev/jade/*.jade", "!./dev/jade/_*.jade"],
-			"css"       : "./dev/sass/main.scss",
+			"html"      : ["./dev/jade/**/*.jade", "!./dev/jade/**/_*.jade"],
+			"css"       : "./dev/sass/*.scss",
 			"js"        : ["./dev/js/**/*.js", "!./dev/js/vendor/**/*.js"],
 			"js_vendor" : "./dev/js/vendor/**/*.js",
 			"img"       : "./dev/img/**/*",

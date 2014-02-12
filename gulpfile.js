@@ -24,7 +24,6 @@ gulp.task('compass', function() {
 			sass: 'dev/sass'
 		})) // Пути к css и scss должны совпадать с путями в config.rb
 		.on('error', console.log) // Если есть ошибки, выводим и продолжаем
-		.pipe(concat('main.css'))
 		.pipe(gulp.dest('./www/css'))
 		.pipe(livereload(server)); // даем команду на перезагрузку страницы
 });
@@ -36,7 +35,7 @@ gulp.task('jade', function() {
 	gulp.src(config.build.src.html)
 		.pipe(jade({
 			pretty: true
-		}))  // Собираем Jade только в папке ./www/jade/ исключая файлы с _*
+		}))  // Собираем Jade, исключая файлы с _*
 		.on('error', console.log) // Если есть ошибки, выводим и продолжаем
 		.pipe(gulp.dest(config.build.dest.html)) // Записываем собранные файлы
 		.pipe(livereload(server)); // даем команду на перезагрузку страницы
@@ -47,7 +46,7 @@ gulp.task('jade', function() {
 
 gulp.task('js', function() {
 	gulp.src(config.build.src.js)
-		.pipe(concat('index.js')) // Собираем все JS, кроме тех которые находятся в ./www/js/vendor/**
+		.pipe(concat('main.js')) // Собираем все JS, кроме тех которые находятся в ./www/js/vendor/**
 		.pipe(gulp.dest(config.build.dest.js))
 		.pipe(livereload(server)); // даем команду на перезагрузку страницы
 });
@@ -124,7 +123,6 @@ gulp.task('build', function() {
 			sass: 'dev/sass'
 		})) // Пути к css и scss должны совпадать с путями в config.rb
 		.on('error', console.log) // Если есть ошибки, выводим и продолжаем
-		.pipe(rename('main.css'))
 		.pipe(gulp.dest(config.build.dest.css));
 
 	// jade
@@ -136,7 +134,7 @@ gulp.task('build', function() {
 
 	// js
 	gulp.src(config.build.src.js)
-		.pipe(concat('index.js'))
+		.pipe(concat('main.js'))
 		.pipe(gulp.dest(config.build.dest.js));
 
 	gulp.src(config.build.src.js_vendor)
@@ -175,7 +173,7 @@ gulp.task('production', function() {
 
 	// js
 	gulp.src(config.build.src.js)
-		.pipe(concat('index.js'))
+		.pipe(concat('main.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(config.build.dest.js));
 
