@@ -3,7 +3,7 @@ gulp-scaffold-website
 
 Шаблон для сайта с подключенными gulp, Jade, Compass, HTML5Boilerplate, Normalize.css, html5shiv.js
 
-sudo npm install -g
+sudo npm install -g gulp
 
 npm install
 
