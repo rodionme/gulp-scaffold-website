@@ -58,6 +58,13 @@ gulp.task('js-vendor', function() {
 		.pipe(livereload(server));
 });
 
+// Копируем js-файлы с префиксом _ без изменений
+gulp.task('js-other', function() {
+	gulp.src(config.build.src.js_other)
+		.pipe(gulp.dest(config.build.dest.js))
+		.pipe(livereload(server));
+});
+
 
 // Копируем и минимизируем изображения
 
@@ -100,6 +107,7 @@ gulp.task('watch', function() {
 		});
 		gulp.watch(config.watch.js, function() {
 			gulp.run('js');
+			gulp.run('js-other');
 		});
 		gulp.watch(config.watch.js_vendor, function() {
 			gulp.run('js-vendor');
@@ -141,6 +149,10 @@ gulp.task('build', function() {
 		.pipe(concat('plugins.js'))
 		.pipe(gulp.dest(config.build.dest.js));
 
+	gulp.src(config.build.src.js_other)
+		.pipe(gulp.dest(config.build.dest.js))
+		.pipe(livereload(server));
+
 	// image
 	gulp.src(config.build.src.img)
 		.pipe(gulp.dest(config.build.dest.img));
@@ -180,6 +192,11 @@ gulp.task('production', function() {
 	gulp.src(config.build.src.js_vendor)
 		.pipe(concat('plugins.js'))
 		.pipe(gulp.dest(config.build.dest.js));
+
+	gulp.src(config.build.src.js_other)
+		.pipe(uglify())
+		.pipe(gulp.dest(config.build.dest.js))
+		.pipe(livereload(server));
 
 	// image
 	gulp.src(config.build.src.img)

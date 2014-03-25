@@ -47,6 +47,11 @@ button {
 
 // Helper classes
 
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
 .clearfix:before,
 .clearfix:after {
 	content: " ";

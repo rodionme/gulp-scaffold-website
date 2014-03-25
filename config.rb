@@ -4,6 +4,7 @@
 http_path = "/"
 css_dir = "dev/css"
 sass_dir = "dev/sass"
+fonts_dir = ""
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed

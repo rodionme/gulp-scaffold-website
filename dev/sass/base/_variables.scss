@@ -1,6 +1,9 @@
+// SIZES
+
 $base-font-size: 16px;
 
-/* FUNCTIONS */
+// FUNCTIONS
+
 @function perc($px, $base: $base-screen-width) {
 	@return ($px / $base) * 100%;
 }
@@ -15,7 +18,8 @@ $base-font-size: 16px;
 
 $base-screen-width: rem(1080px);
 
-/* FONTS */
+// FONTS
+
 @font-face {
 	font-family: "sample";
 	src: url("../fonts/sample.ttf") format("truetype");
