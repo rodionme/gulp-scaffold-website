@@ -1,15 +1,18 @@
 {
-	"build" : {
-		"src" : {
-			"html"      : ["./dev/jade/**/*.jade", "!./dev/jade/**/_*.jade"],
+	"build": {
+		"src": {
+			"html"      : ["./dev/jade/**/*.jade",
+			               "!./dev/jade/**/_*.jade"],
 			"css"       : "./dev/sass/*.scss",
-			"js"        : ["./dev/js/**/*.js", "!./dev/js/vendor/**/*.js", "!./dev/js/**/_*.js"],
+			"js"        : ["./dev/js/**/*.js",
+			               "!./dev/js/vendor/**/*.js",
+			               "!./dev/js/**/_*.js"],
 			"js_vendor" : "./dev/js/vendor/**/*.js",
 			"js_other"  : "./dev/js/**/_*.js",
 			"img"       : "./dev/img/**/*",
 			"fonts"     : "./dev/fonts/**/*"
 		},
-		"dest" : {
+		"dest": {
 			"css"   : "www/css",
 			"html"  : "www/",
 			"js"    : "www/js",
@@ -17,12 +20,19 @@
 			"fonts" : "www/fonts"
 		}
 	},
-	"watch" : {
+	"watch": {
 		"scss"      : "dev/sass/**/*.scss",
 		"jade"      : "dev/jade/**/*.jade",
 		"js"        : "dev/js/**/*.js",
 		"js_vendor" : "dev/js/vendor/**/*.js",
 		"img"       : "dev/img/**/*",
 		"fonts"     : "dev/fonts/**/*"
+	},
+	"server": {
+		"host": "",
+		"port": "21",
+		"user": "",
+		"pass": "",
+		"remotePath": "/"
 	}
 }

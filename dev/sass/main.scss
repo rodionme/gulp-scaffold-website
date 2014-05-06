@@ -1,31 +1,22 @@
-@import "compass/css3/box-sizing";
+@import "compass/css3";
 
 * {
 	@include box-sizing(border-box);
 }
 
-@import "boilerplate";
-@import "normalize";
+@import "base/boilerplate";
+@import "base/normalize";
 
-@import "variables";
+@import "base/variables";
 
 
 // GENERAL
 
-body {
-	font-size: $base-font-size;
-	-webkit-touch-callout: none;     /* prevent callout to copy image, etc when tap to hold */
-	-webkit-text-size-adjust: none;  /* prevent webkit from resizing text to fit */
-	-webkit-user-select: none;       /* prevent copy paste, to allow, change 'none' to 'text' */
-}
-
-.page-container:not(.active) {
-	display: none;
-}
+@import "base/general";
+@import "base/helpers";
 
 // PARTS
 
-@import "parts/helpers";
 @import "parts/spinner";
 
 @import "parts/header";
