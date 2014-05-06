@@ -18,6 +18,10 @@
       "js"    : "www/js",
       "img"   : "www/img",
       "fonts" : "www/fonts"
+    },
+    "web": {
+      "css": "web/theme/css",
+      "js": "web/theme/js"
     }
   },
   "watch": {
@@ -29,10 +33,10 @@
     "fonts"     : "dev/fonts/**/*"
   },
   "server": {
-    "host": "",
+    "host": "joomla.den.fpmsoft.com",
     "port": "21",
-    "user": "",
-    "pass": "",
+    "user": "rodion_joomla",
+    "pass": "joomla_rodion",
     "remotePath": "/"
   }
 }

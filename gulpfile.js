@@ -205,22 +205,23 @@ gulp.task('production', function() {
 });
 
 // Загрузка на удаленный сервер
+var settings = config.server;
 
 // js
 gulp.task('upload-js', function () {
-  var settings = config.server;
   settings.remotePath = '/web/js';
 
-  gulp.src(config.build.dest.js + '/**')
+  gulp.src(config.build.dest.js + '/**/*')
+    .pipe(gulp.dest(config.build.web.js))
     .pipe(ftp(settings));
 });
 
 // css
 gulp.task('upload-css', function () {
-  var settings = config.server;
   settings.remotePath = '/web/css';
 
   gulp.src(config.build.dest.css + '/**')
+    .pipe(gulp.dest(config.build.web.css))
     .pipe(ftp(settings));
 });
 
