@@ -13,4 +13,6 @@ gulp build для сборки
 
 gulp production для минификации
 
+gulp upload для загрузки на сервер
+
 Сервер - http://localhost:8888
