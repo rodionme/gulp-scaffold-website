@@ -1,16 +1,29 @@
 {
   "build": {
     "src": {
-      "html"      : ["./dev/jade/**/*.jade",
-                     "!./dev/jade/**/_*.jade"],
+      "html"      : [ "./dev/jade/**/*.jade",
+                      "!./dev/jade/**/_*.jade" ],
+
       "css"       : "./dev/sass/*.scss",
-      "js"        : ["./dev/js/**/*.js",
-                     "!./dev/js/vendor/**/*.js",
-                     "!./dev/js/**/_*.js"],
-      "js_vendor" : "./dev/js/vendor/**/*.js",
+
+      "js"        : [ "./dev/js/**/*.js",
+                      "!./dev/js/**/_*.js" ],
+
+      "js_vendor" : "./dev/vendor/**/*.js",
+      "js_order"  : [ "jquery/**/*.js",
+                      "**/*.js" ],
+
       "js_other"  : "./dev/js/**/_*.js",
-      "img"       : "./dev/img/**/*",
-      "fonts"     : "./dev/fonts/**/*"
+
+      "img"       : [ "dev/img/**/*.png",
+                      "dev/img/**/*.jpg",
+                      "dev/img/**/*.gif" ],
+
+      "fonts"     : [ "dev/fonts/**/*.eot",
+                      "dev/fonts/**/*.ttf",
+                      "dev/fonts/**/*.svg",
+                      "dev/fonts/**/*.otf",
+                      "dev/fonts/**/*.woff" ]
     },
     "dest": {
       "css"   : "www/css",
@@ -18,25 +31,37 @@
       "js"    : "www/js",
       "img"   : "www/img",
       "fonts" : "www/fonts"
-    },
-    "web": {
-      "css": "web/theme/css",
-      "js": "web/theme/js"
     }
   },
   "watch": {
-    "scss"      : "dev/sass/**/*.scss",
+    "scss"      : ["dev/sass/**/*.scss",
+                   "dev/vendor/**/*.scss"],
+
     "jade"      : "dev/jade/**/*.jade",
+
     "js"        : "dev/js/**/*.js",
-    "js_vendor" : "dev/js/vendor/**/*.js",
-    "img"       : "dev/img/**/*",
-    "fonts"     : "dev/fonts/**/*"
+
+    "js_vendor" : "dev/vendor/**/*.js",
+
+    "img"       : [ "dev/img/**/*.png",
+                    "dev/img/**/*.jpg",
+                    "dev/img/**/*.gif" ],
+
+    "fonts"     : [ "dev/fonts/**/*.eot",
+                    "dev/fonts/**/*.ttf",
+                    "dev/fonts/**/*.svg",
+                    "dev/fonts/**/*.otf",
+                    "dev/fonts/**/*.woff" ]
   },
   "server": {
-    "host": "joomla.den.fpmsoft.com",
+    "host": "host.com",
     "port": "21",
-    "user": "rodion_joomla",
-    "pass": "joomla_rodion",
+    "user": "username",
+    "pass": "userpass",
     "remotePath": "/"
+  },
+  "upload": {
+    "css": "web/theme/css",
+    "js": "web/theme/js"
   }
 }

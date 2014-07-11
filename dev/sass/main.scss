@@ -1,27 +1,26 @@
-@import "compass/css3";
+@import 'compass/css3';
 
-* {
-  @include box-sizing(border-box);
-}
+// BASE
 
-@import "base/boilerplate";
-@import "base/normalize";
+@import 'base/boilerplate';
+@import 'base/normalize';
 
-@import "base/variables";
-
-
-// GENERAL
-
-@import "base/general";
-@import "base/helpers";
+@import 'base/sizes';
+@import 'base/fonts';
+@import 'base/mixins';
+@import 'base/colors';
+@import 'base/general';
 
 // PARTS
 
-@import "parts/spinner";
+@import 'parts/loader';
 
-@import "parts/header";
-@import "parts/footer";
+@import 'parts/header';
+@import 'parts/footer';
+
+// PLUGINS
+
 
 // PAGES
 
-@import "pages/home";
+@import 'pages/index';

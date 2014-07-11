@@ -1,0 +1,12 @@
+extend _template
+
+block pageTitle
+  - var pageTitle = 'Index'
+block prepend body
+  body
+    //- For SPA
+    section#page-launch.container(src="page-launch.html")
+    //- For common site
+    section.page-content.index-page
+      //- Jade including example
+      include parts/_spinner
