@@ -170,7 +170,7 @@ gulp.task('build', ['clean'], function () {
 gulp.task('production', ['clean'], function() {
   // css
   compassTask()
-    // .pipe(csso())
+    .pipe(csso())
     .pipe(gulp.dest(config.build.dest.css));
 
   // jade
@@ -186,6 +186,7 @@ gulp.task('production', ['clean'], function() {
     .pipe(gulp.dest(config.build.dest.js));
 
   gulp.src(config.build.src.js_vendor)
+    .pipe(order(config.build.src.js_order))
     .pipe(concat('plugins.js'))
     .pipe(gulp.dest(config.build.dest.js));
 
