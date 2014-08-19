@@ -1,7 +1,6 @@
 // Инициализируем плагины
 var gulp        = require('gulp'),            // Собственно Gulp JS
     config      = require('./config.json'),   // Конфиг для проектов
-    rename      = require('gulp-rename'),     // Переименование файлов
     newer       = require('gulp-newer'),      // Passing through only those source files that are newer than corresponding destination files
     concat      = require('gulp-concat'),     // Склейка файлов
     jade        = require('gulp-jade'),       // Плагин для Jade
@@ -22,7 +21,7 @@ var gulp        = require('gulp'),            // Собственно Gulp JS
 
 // Очистка результирующей папки
 gulp.task('clean', function() {
-  del('www/**', function (err) {
+  del('www/**', function () {
     console.log('Files deleted');
   });
 });
@@ -52,7 +51,7 @@ function compassTask() {
 
 
 // Собираем css из Compass
-gulp.task('compass', ['csscomb'], function() {
+gulp.task('compass', function() {
   compassTask()
     .pipe(reload({ stream: true }));
 });
@@ -64,6 +63,7 @@ gulp.task('jade', function() {
     .pipe(newer(config.build.dest.html, '.html'))
     .pipe(plumber({ errorHandler: notify.onError("<%= error.message %>") }))
     .pipe(jade({
+      doctype: 'html',
       pretty: true
     }))
     .pipe(gulp.dest(config.build.dest.html))

@@ -21,6 +21,9 @@
       "$variable"
     ],
     [
+      "$include"
+    ],
+    [
       "position",
       "z-index",
       "top",
@@ -74,8 +77,6 @@
       "list-style-position",
       "list-style-type",
       "list-style-image",
-
-      "$include",
 
       "font",
       "font-family",

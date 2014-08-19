@@ -6,7 +6,6 @@
   "license": "none",
   "devDependencies": {
     "gulp": "^3.8.5",
-    "gulp-rename": "^1.2.0",
     "gulp-newer": "^0.3.0",
     "gulp-ftp": "^0.4.0",
     "gulp-compass": "^1.1.9",
