@@ -1,7 +1,8 @@
 @include font-face('samplefont', font-files('fonts/samplefont/samplefont.woff',
-                                            'fonts/samplefont/samplefont.ttf'),
-                                            'fonts/samplefont/samplefont.eot');
+                                            'fonts/samplefont/samplefont.ttf',
+                                            'fonts/samplefont/samplefont.svg'),
+                                            'fonts/samplefont/samplefont.eot', 400, normal);
 
-@mixin samplefont($size, $line-height: normal) {
-  font: normal #{$size}/#{$line-height} samplefont, sans-serif;
+@mixin samplefont($font-size: $base-font-size, $line-height: normal) {
+  font: normal #{$font-size}/#{$line-height} samplefont, sans-serif;
 }

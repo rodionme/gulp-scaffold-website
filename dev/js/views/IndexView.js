@@ -1,11 +1,11 @@
 'use strict';
 
-var LaunchView = (function () {
+var IndexView = (function () {
   function render(pageId) {
     var pageContainer = document.getElementById(pageId),
         html;
 
-    html = '<p>Launch page</p>';
+    html = '<p>Index page</p>';
 
     pageContainer.innerHTML = html;
   }

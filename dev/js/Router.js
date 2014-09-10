@@ -1,10 +1,12 @@
+// For SPA
+
 'use strict';
 
 var Router = (function () {
   var routes = [
-    {id: 'page-launch', hash: '#page-launch', controller: 'LaunchController'}
+    {id: 'page-index', hash: '#page-index', controller: 'IndexController'}
   ],
-      defaultRoute = '#page-launch',
+      defaultRoute = '#page-index',
       currentHash = '';
 
   function startRouting() {
@@ -20,7 +22,7 @@ var Router = (function () {
     var isPageFound = false,
         i, currentRoute;
 
-    $(document.body).find('section').removeClass('active');
+    $(document.body).find('.page-container').removeClass('active');
 
     if (window.location.hash !== currentHash) {
       for (i = 0; currentRoute = routes[i++];) {
@@ -41,9 +43,50 @@ var Router = (function () {
 
   function loadController(route) {
     console.log(route.hash);
-    $(document.body).attr('page', route.id);
+    $(document.body).data('page', route.id);
     $(route.hash).addClass('active');
 
+    window[route.controller].start(route.id);
+  }
+
+  return {
+    startRouting: startRouting
+  };
+})();
+
+// For common site
+
+'use strict';
+
+var Router = (function () {
+  var routes = [
+    { id: 'index-page', controller: 'IndexController' }
+  ];
+
+  function startRouting() {
+    pageCheck();
+  }
+
+  function pageCheck() {
+    var pageId = $(document.body).find('.page-container').attr('id'),
+        isPageFound = false,
+        i, currentRoute;
+
+    for (i = 0; currentRoute = routes[i++];) {
+      if (pageId === currentRoute.id) {
+        isPageFound = true;
+        break;
+      }
+    }
+
+    if (isPageFound) {
+      loadController(currentRoute);
+    } else {
+      console.log('Page id not found');
+    }
+  }
+
+  function loadController(route) {
     window[route.controller].start(route.id);
   }
 

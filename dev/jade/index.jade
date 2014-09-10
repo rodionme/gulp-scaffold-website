@@ -5,8 +5,8 @@ block pageTitle
 block prepend body
   body
     //- For SPA
-    section#page-launch.container(src="page-launch.html")
+    section#page-index.page-container(src="page-index.html")
     //- For common site
-    section.page-content.index-page
+    section#page-index.page-container.index-page
       //- Jade including example
-      include parts/_spinner
+      include parts/_loader

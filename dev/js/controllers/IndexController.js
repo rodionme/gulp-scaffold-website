@@ -1,8 +1,8 @@
 'use strict';
 
-var LaunchController = (function () {
+var IndexController = (function () {
   function start(pageId) {
-    LaunchView.render(pageId);
+    IndexView.render(pageId);
   }
 
   return {
