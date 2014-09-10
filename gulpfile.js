@@ -56,6 +56,12 @@ gulp.task('compass', function() {
     .pipe(reload({ stream: true }));
 });
 
+gulp.task('compass-min', function() {
+  compassTask()
+    .pipe(csso())
+    .pipe(gulp.dest(config.build.dest.css));
+});
+
 
 // Собираем html из Jade
 gulp.task('jade', function() {
@@ -68,6 +74,13 @@ gulp.task('jade', function() {
     }))
     .pipe(gulp.dest(config.build.dest.html))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task('jade-min', function() {
+  return gulp.src(config.build.src.html)
+    .pipe(plumber({ errorHandler: notify.onError("<%= error.message %>") }))
+    .pipe(jade())
+    .pipe(gulp.dest(config.build.dest.html));
 });
 
 
@@ -83,12 +96,26 @@ gulp.task('js', function() {
     .pipe(reload({ stream: true }));
 });
 
+gulp.task('js-min', function() {
+  return gulp.src(config.build.src.js)
+    .pipe(concat('main.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(config.build.dest.js));
+});
+
 gulp.task('js-vendor', function() {
   return gulp.src(config.build.src.js_vendor)
     .pipe(order(config.build.src.js_order))
     .pipe(concat('plugins.js'))
     .pipe(gulp.dest(config.build.dest.js))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task('js-vendor-min', function() {
+  return gulp.src(config.build.src.js_vendor)
+    .pipe(order(config.build.src.js_order))
+    .pipe(concat('plugins.js'))
+    .pipe(gulp.dest(config.build.dest.js));
 });
 
 gulp.task('js-other', function() {
@@ -101,6 +128,12 @@ gulp.task('js-other', function() {
     .pipe(reload({ stream: true }));
 });
 
+gulp.task('js-other-min', function() {
+  return gulp.src(config.build.src.js_other)
+    .pipe(uglify())
+    .pipe(gulp.dest(config.build.dest.js));
+});
+
 
 // Копируем изображения
 gulp.task('images', function() {
@@ -110,6 +143,12 @@ gulp.task('images', function() {
     .pipe(reload({ stream: true }));
 });
 
+gulp.task('images-min', function() {
+  return gulp.src(config.build.src.img)
+    .pipe(imagemin())
+    .pipe(gulp.dest(config.build.dest.img));
+});
+
 
 // Копируем шрифты
 gulp.task('fonts', function() {
@@ -117,6 +156,11 @@ gulp.task('fonts', function() {
     .pipe(newer(config.build.dest.fonts))
     .pipe(gulp.dest(config.build.dest.fonts))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task('fonts-min', function() {
+  return gulp.src(config.build.src.fonts)
+    .pipe(gulp.dest(config.build.dest.fonts));
 });
 
 
@@ -161,47 +205,14 @@ gulp.task('watch', ['jade', 'compass', 'js', 'js-other', 'js-vendor', 'images', 
 
 
 // Сборка неминимизированного проекта
-gulp.task('build', ['clean'], function () {
-  gulp.start(['jade', 'compass', 'js', 'js-vendor', 'js-other', 'images', 'fonts']);
+gulp.task('build', ['images', 'fonts'], function () {
+  gulp.start(['jade', 'compass', 'js', 'js-vendor', 'js-other']);
 });
 
 
 // Сборка минимизированного проекта
-gulp.task('production', ['clean'], function() {
-  // css
-  compassTask()
-    .pipe(csso())
-    .pipe(gulp.dest(config.build.dest.css));
-
-  // jade
-  gulp.src(config.build.src.html)
-    .pipe(plumber({ errorHandler: notify.onError("<%= error.message %>") }))
-    .pipe(jade())
-    .pipe(gulp.dest(config.build.dest.html));
-
-  // js
-  gulp.src(config.build.src.js)
-    .pipe(concat('main.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(config.build.dest.js));
-
-  gulp.src(config.build.src.js_vendor)
-    .pipe(order(config.build.src.js_order))
-    .pipe(concat('plugins.js'))
-    .pipe(gulp.dest(config.build.dest.js));
-
-  gulp.src(config.build.src.js_other)
-    .pipe(uglify())
-    .pipe(gulp.dest(config.build.dest.js));
-
-  // image
-  gulp.src(config.build.src.img)
-    .pipe(imagemin())
-    .pipe(gulp.dest(config.build.dest.img));
-
-  // fonts
-  gulp.src(config.build.src.fonts)
-    .pipe(gulp.dest(config.build.dest.fonts));
+gulp.task('production', ['images-min', 'fonts-min'], function() {
+  gulp.start(['jade-min', 'compass-min', 'js-min', 'js-vendor-min', 'js-other-min']);
 });
 
 
