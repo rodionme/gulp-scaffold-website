@@ -4,10 +4,10 @@
 
 var Router = (function () {
   var routes = [
-    {id: 'page-index', hash: '#page-index', controller: 'IndexController'}
-  ],
-      defaultRoute = '#page-index',
-      currentHash = '';
+      {id: 'page-index', hash: '#page-index', controller: 'IndexController'}
+    ],
+    defaultRoute = '#page-index',
+    currentHash = '';
 
   function startRouting() {
     if (window.location.hash) {
@@ -20,9 +20,11 @@ var Router = (function () {
 
   function hashCheck() {
     var isPageFound = false,
-        i, currentRoute;
+      i, currentRoute;
 
-    $(document.body).find('.page-container').removeClass('active');
+    [].forEach.call(document.querySelectorAll('.page-container'), function (elem) {
+      elem.classList.remove('active');
+    });
 
     if (window.location.hash !== currentHash) {
       for (i = 0; currentRoute = routes[i++];) {
@@ -43,8 +45,8 @@ var Router = (function () {
 
   function loadController(route) {
     console.log(route.hash);
-    $(document.body).data('page', route.id);
-    $(route.hash).addClass('active');
+    document.body.setAttribute('data-page', route.id);
+    document.getElementById(route.id).classList.add('active');
 
     window[route.controller].start(route.id);
   }
@@ -60,7 +62,7 @@ var Router = (function () {
 
 var Router = (function () {
   var routes = [
-    { id: 'index-page', controller: 'IndexController' }
+    {id: 'index-page', controller: 'IndexController'}
   ];
 
   function startRouting() {
@@ -68,9 +70,10 @@ var Router = (function () {
   }
 
   function pageCheck() {
-    var pageId = $(document.body).find('.page-container').attr('id'),
-        isPageFound = false,
-        i, currentRoute;
+    var pageId = document.querySelector('.page-container').id,
+      isPageFound = false,
+      i,
+      currentRoute;
 
     for (i = 0; currentRoute = routes[i++];) {
       if (pageId === currentRoute.id) {
