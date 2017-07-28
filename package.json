@@ -1,6 +1,6 @@
 {
   "name": "gulp-scaffold-website",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Scaffold for fast website building",
   "main": "index.js",
   "scripts": {
@@ -17,23 +17,23 @@
   },
   "homepage": "https://github.com/rodionme/gulp-scaffold-website#readme",
   "devDependencies": {
-    "autoprefixer": "^6.3.7",
-    "autoprefixer-stylus": "^0.9.4",
-    "browser-sync": "^2.13.0",
-    "del": "^2.2.0",
+    "autoprefixer": "^7.1.2",
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
     "gulp": "gulpjs/gulp#4.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-csso": "^2.0.0",
-    "gulp-ftp": "^1.1.0",
-    "gulp-if": "^2.0.1",
-    "gulp-imagemin": "^3.0.1",
-    "gulp-jade": "^1.1.0",
-    "gulp-notify": "^2.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-notify": "^3.0.0",
     "gulp-order": "^1.1.1",
     "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.1.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-stylus": "^2.4.0",
-    "gulp-uglify": "^1.5.4"
+    "gulp-postcss": "^7.0.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "vinyl-ftp": "^0.6.0"
   }
 }

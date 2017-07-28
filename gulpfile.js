@@ -1,31 +1,31 @@
 'use strict';
 
-const gulp          = require('gulp'),                      // Собственно Gulp JS
-      del           = require('del'),                       // Удаление файлов и папок
-      plumber       = require('gulp-plumber'),              // Перехватчик ошибок
-      notify        = require('gulp-notify'),               // Нотификатор
+const gulp          = require('gulp'),                      // gulp
+      del           = require('del'),                       // Files and folders remover
+      plumber       = require('gulp-plumber'),              // Errors resolver
+      notify        = require('gulp-notify'),               // Notifier
       sourcemaps    = require('gulp-sourcemaps'),           // Sourcemaps
       browserSync   = require('browser-sync').create(),     // Live reload
-      concat        = require('gulp-concat'),               // Склейка файлов
-      stylus        = require('gulp-stylus'),               // Плагин для Stylus
+      concat        = require('gulp-concat'),               // Files concatenation
+      sass          = require('gulp-sass'),                 // Sass
+      stylus        = require('gulp-stylus'),               // Stylus
       postcss       = require('gulp-postcss'),              // PostCSS
       autoprefixer  = require('autoprefixer'),              // Autoprefixer
-      jade          = require('gulp-jade'),                 // Плагин для Jade
-      csso          = require('gulp-csso'),                 // Минификация CSS
-      imagemin      = require('gulp-imagemin'),             // Минификация изображений
-      uglify        = require('gulp-uglify'),               // Минификация JS
-      ftp           = require('gulp-ftp'),                  // FTP-клиент
-      gulpIf        = require('gulp-if'),                   // Добавление условий
-      order         = require('gulp-order');                // Определение порядка файлов в потоке
+      pug           = require('gulp-pug'),                  // Pug
+      csso          = require('gulp-csso'),                 // CSS minifier
+      imagemin      = require('gulp-imagemin'),             // Images minifier
+      uglify        = require('gulp-uglify'),               // JS minifier
+      ftp           = require('vinyl-ftp'),                 // FTP-client
+      gulpIf        = require('gulp-if'),                   // Flow conditions
+      order         = require('gulp-order');                // File order
 
 
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 require('./config.js');
-require('./ftp.js');
 
 
-// Очистка результирующей папки
+// Clean resulting folder
 gulp.task('clean', function () {
   return del('dist/**', function () {
     console.log('Files deleted');
@@ -33,18 +33,19 @@ gulp.task('clean', function () {
 });
 
 
-// Собираем css из Stylus
+// Compile CSS
 gulp.task('styles', function () {
   return gulp.src(config.build.src.css)
     .pipe(plumber({errorHandler: notify.onError("<%= error.message %>")}))
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(stylus())
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    // .pipe(stylus())
+    // Path must be a string. Received undefined
     //.pipe(stylus({
     //  define: {
     //    url: require('stylus').resolver()
     //  }
     //}))
-    // Path must be a string. Received undefined
     .pipe(postcss([autoprefixer({
       browsers: config.browsers,        // https://github.com/ai/browserslist
       cascade: false
@@ -55,19 +56,19 @@ gulp.task('styles', function () {
 });
 
 
-// Собираем html из Jade
-gulp.task('jade', function () {
-  return gulp.src(config.build.src.html, {since: gulp.lastRun('jade')})
+// Compile HTML
+gulp.task('views', function () {
+  return gulp.src(config.build.src.html, {since: gulp.lastRun('views')})
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-    .pipe(gulpIf(isDevelopment, jade({
+    .pipe(gulpIf(isDevelopment, pug({
       doctype: 'html',
       pretty: true
-    }), jade()))
+    }), pug()))
     .pipe(gulp.dest(config.build.dest.html));
 });
 
 
-// Собираем JS
+// Compile JS
 gulp.task('js', function () {
   return gulp.src(config.build.src.js)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
@@ -98,7 +99,7 @@ gulp.task('js:other', function () {
 });
 
 
-// Копируем изображения
+// Copy images
 gulp.task('images', function () {
   return gulp.src(config.build.src.img, {since: gulp.lastRun('images')})
     .pipe(gulpIf(!isDevelopment, imagemin()))
@@ -106,14 +107,14 @@ gulp.task('images', function () {
 });
 
 
-// Копируем шрифты
+// Copy fonts
 gulp.task('fonts', function () {
   return gulp.src(config.build.src.fonts, {since: gulp.lastRun('fonts')})
     .pipe(gulp.dest(config.build.dest.fonts));
 });
 
 
-// Локальный сервер для разработки
+// Local development server
 gulp.task('server', function () {
   browserSync.init({
     server: 'dist',
@@ -132,13 +133,13 @@ gulp.task('server', function () {
 });
 
 
-// Сборка неминимизированного проекта
-gulp.task('build', gulp.parallel('jade', 'styles', 'js', 'js:other', 'js:vendor', 'images', 'fonts'));
+// Project assembly
+gulp.task('build', gulp.parallel('views', 'styles', 'js', 'js:other', 'js:vendor', 'images', 'fonts'));
 
 
-// Отслеживание изменений
+// Watching changes
 gulp.task('watch', function () {
-  gulp.watch(config.watch.jade, gulp.series('jade'));
+  gulp.watch(config.watch.html, gulp.series('views'));
   gulp.watch(config.watch.css, gulp.series('styles'));
   gulp.watch(config.watch.js, gulp.parallel('js', 'js:other'));
   gulp.watch(config.watch.js_vendor, gulp.series('js:vendor'));
@@ -147,24 +148,38 @@ gulp.task('watch', function () {
 });
 
 
-// Загрузка на удаленный сервер
+// Upload to remote server
 
-// js
+// JS
 gulp.task('upload:js', gulp.series('build', function () {
-  ftpConfig.remotePath = '/web/js';
+  var conn = ftp.create({
+    host: 'mywebsite.tld',
+    user: 'me',
+    password: 'mypass'
+  });
 
-  gulp.src(config.build.dest.js + '/**/*')
-    // .pipe(gulp.dest(config.upload.js))   // Дублировать для WP
-    .pipe(ftp(ftpConfig));
+  return gulp.src(config.build.dest.js + '/**/*', {
+    base: '.',
+    buffer: false
+  })
+    .pipe(conn.newer('/public_html'))
+    .pipe(conn.dest('/public_html'));
 }));
 
-// css
+// CSS
 gulp.task('upload:css', gulp.series('build', function () {
-  ftpConfig.remotePath = '/web/js';
+  var conn = ftp.create({
+    host: 'mywebsite.tld',
+    user: 'me',
+    password: 'mypass'
+  });
 
-  gulp.src(config.build.dest.css + '/**')
-    // .pipe(gulp.dest(config.upload.css))   // Дублировать для WP
-    .pipe(ftp(ftpConfig));
+  return gulp.src(config.build.dest.css + '/**', {
+    base: '.',
+    buffer: false
+  })
+    .pipe(conn.newer('/public_html'))
+    .pipe(conn.dest('/public_html'));
 }));
 
 gulp.task('upload', gulp.parallel('upload:js', 'upload:css'));

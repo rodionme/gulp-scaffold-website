@@ -2,10 +2,11 @@ global.config = {
   build: {
     src: {
       html: [
-        './src/jade/**/*.jade',
-        '!./src/jade/**/_*.jade'
+        './src/views/**/*.pug',
+        '!./src/views/**/_*.pug'
       ],
-      css: './src/styles/main.styl',
+      // css: './src/styles/main.styl',
+      css: './src/styles/main.scss',
       js: [
         './src/js/**/*.js',
         '!./src/js/**/_*.js'
@@ -29,8 +30,9 @@ global.config = {
     }
   },
   watch: {
-    css: 'src/{styles,vendor}/**/*.styl',
-    jade: 'src/jade/**/*.jade',
+    // css: 'src/{styles,vendor}/**/*.styl',
+    css: 'src/{styles,vendor}/**/*.scss',
+    html: 'src/views/**/*.pug',
     js: 'src/js/**/*.js',
     js_vendor: 'src/vendor/**/*.js',
     img: 'src/img/**/*.{png,jpg,gif}',
