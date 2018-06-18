@@ -7,14 +7,10 @@ global.config = {
       ],
       // css: './src/styles/main.styl',
       css: './src/styles/main.scss',
-      js: [
-        './src/js/**/*.js',
-        '!./src/js/**/_*.js'
-      ],
-      js_vendor: './src/vendor/**/*.js',
-      js_order: [
-        'jquery/**/*.js',
-        '**/*.js'
+      js: './src/js/**/*.js',
+      js_vendor: [
+        './src/vendor/jquery/**/*.js',
+        './src/vendor/**/*.js',
       ],
       js_other: './src/js/**/_*.js',
       img: 'src/img/**/*.{png,jpg,gif}',

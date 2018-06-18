@@ -1,1 +1,1 @@
-function delete_me() {}
+// Delete me. I exist just for example

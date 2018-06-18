@@ -16,8 +16,7 @@ const gulp          = require('gulp'),                      // gulp
       imagemin      = require('gulp-imagemin'),             // Images minifier
       uglify        = require('gulp-uglify'),               // JS minifier
       ftp           = require('vinyl-ftp'),                 // FTP-client
-      gulpIf        = require('gulp-if'),                   // Flow conditions
-      order         = require('gulp-order');                // File order
+      gulpIf        = require('gulp-if');                   // Flow conditions
 
 
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
@@ -83,7 +82,6 @@ gulp.task('js:vendor', function () {
   return gulp.src(config.build.src.js_vendor)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(order(config.build.src.js_order))
     .pipe(concat('plugins.js'))
     .pipe(gulpIf(isDevelopment, sourcemaps.write()))
     .pipe(gulp.dest(config.build.dest.js));
@@ -152,7 +150,7 @@ gulp.task('watch', function () {
 
 // JS
 gulp.task('upload:js', gulp.series('build', function () {
-  var conn = ftp.create({
+  let conn = ftp.create({
     host: 'mywebsite.tld',
     user: 'me',
     password: 'mypass'
@@ -168,7 +166,7 @@ gulp.task('upload:js', gulp.series('build', function () {
 
 // CSS
 gulp.task('upload:css', gulp.series('build', function () {
-  var conn = ftp.create({
+  let conn = ftp.create({
     host: 'mywebsite.tld',
     user: 'me',
     password: 'mypass'
