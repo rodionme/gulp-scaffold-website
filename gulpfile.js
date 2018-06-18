@@ -35,7 +35,7 @@ gulp.task('clean', function () {
 // Compile CSS
 gulp.task('styles', function () {
   return gulp.src(config.build.src.css)
-    .pipe(plumber({errorHandler: notify.onError("<%= error.message %>")}))
+    .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     // .pipe(stylus())
@@ -57,7 +57,7 @@ gulp.task('styles', function () {
 
 // Compile HTML
 gulp.task('views', function () {
-  return gulp.src(config.build.src.html, {since: gulp.lastRun('views')})
+  return gulp.src(config.build.src.html)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(gulpIf(isDevelopment, pug({
       doctype: 'html',
@@ -109,7 +109,7 @@ gulp.task('server', function () {
     server: 'dist',
     port: 8888,
     notify: false,
-    // browser: ["google chrome", "firefox", "safari"],
+    // browser: ['google chrome', 'firefox', 'safari'],
     open: false,
     ghostMode: {
       clicks: true,
