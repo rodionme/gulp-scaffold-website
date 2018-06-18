@@ -87,15 +87,6 @@ gulp.task('js:vendor', function () {
     .pipe(gulp.dest(config.build.dest.js));
 });
 
-gulp.task('js:other', function () {
-  return gulp.src(config.build.src.js_other)
-    .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-    .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(gulpIf(!isDevelopment, uglify()))
-    .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-    .pipe(gulp.dest(config.build.dest.js));
-});
-
 
 // Copy images
 gulp.task('images', function () {
@@ -132,14 +123,14 @@ gulp.task('server', function () {
 
 
 // Project assembly
-gulp.task('build', gulp.parallel('views', 'styles', 'js', 'js:other', 'js:vendor', 'images', 'fonts'));
+gulp.task('build', gulp.parallel('views', 'styles', 'js', 'js:vendor', 'images', 'fonts'));
 
 
 // Watching changes
 gulp.task('watch', function () {
   gulp.watch(config.watch.html, gulp.series('views'));
   gulp.watch(config.watch.css, gulp.series('styles'));
-  gulp.watch(config.watch.js, gulp.parallel('js', 'js:other'));
+  gulp.watch(config.watch.js, gulp.series('js'));
   gulp.watch(config.watch.js_vendor, gulp.series('js:vendor'));
   gulp.watch(config.watch.img, gulp.series('images'));
   gulp.watch(config.watch.fonts, gulp.series('fonts'));

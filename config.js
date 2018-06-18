@@ -12,8 +12,7 @@ global.config = {
         './src/vendor/jquery/**/*.js',
         './src/vendor/**/*.js',
       ],
-      js_other: './src/js/**/_*.js',
-      img: 'src/img/**/*.{png,jpg,gif}',
+      img: 'src/img/**/*.{png,jpg,gif,svg}',
       fonts: 'src/fonts/**/*.{eot,ttf,svg,otf,woff}'
     },
     dest: {
@@ -31,7 +30,7 @@ global.config = {
     html: 'src/views/**/*.pug',
     js: 'src/js/**/*.js',
     js_vendor: 'src/vendor/**/*.js',
-    img: 'src/img/**/*.{png,jpg,gif}',
+    img: 'src/img/**/*.{png,jpg,gif,svg}',
     fonts: 'src/fonts/**/*.{eot,ttf,svg,otf,woff}'
   },
   upload: {
