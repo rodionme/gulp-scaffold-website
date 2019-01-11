@@ -1,0 +1,49 @@
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+%listreset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin replace-text() {
+  border: 0;
+  color: transparent;
+  font: 0/0 a;
+  text-shadow: none;
+}
+
+@mixin triangle($size, $color, $direction) {
+  content: '';
+  display: block;
+  border-style: solid;
+  height: 0;
+  width: 0;
+
+  $foreground-color: nth($color, 1);
+  $background-color: if(length($color) == 2, nth($color, 2), transparent);
+
+  $width: nth($size, 1) / 2;
+  $height: if(length($size) > 1, nth($size, length($size)), nth($size, length($size))/2);
+
+  @if $direction == up {
+    border-width: 0 $width $height $width;
+    border-color: $background-color $background-color $foreground-color $background-color;
+
+  } @else if $direction == right {
+    border-width: $width 0 $width $height;
+    border-color: $background-color $background-color $background-color $foreground-color;
+
+  } @else if $direction == down {
+    border-width: $width $height 0 $width;
+    border-color: $foreground-color $background-color $background-color $background-color;
+
+  } @else if $direction == left {
+    border-width: $width $height $width 0;
+    border-color: $background-color $foreground-color $background-color $background-color;
+  }
+}

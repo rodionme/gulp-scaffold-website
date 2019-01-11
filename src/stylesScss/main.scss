@@ -4,14 +4,9 @@
 @import "base/mixins";
 @import "base/colors";
 @import "base/general";
-@import "base/grid";
 
 // PARTS
-@import "parts/loader";
-
-
-// PLUGINS
-
+@import "parts/part";
 
 // PAGES
 @import "pages/index";

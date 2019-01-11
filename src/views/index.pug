@@ -2,11 +2,5 @@ extend parts/_template
 
 block pageTitle
   - var pageTitle = 'Index'
-block prepend body
-  body
-    //- For SPA
-    section#page-index.page-container(src="page-index.html")
-    //- For common site
-    section#page-index.page-container.index-page
-      //- Jade including example
-      include parts/_loader
+block append content
+  section#page-index.page-container

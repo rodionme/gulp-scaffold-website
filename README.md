@@ -1,6 +1,11 @@
 gulp-scaffold-website
 =====================
 
-Быстрый старт для веб-разработки с подключенными gulp, Pug, Sass/Stylus, Autoprefixer, локальным сервером с поддержкой live reload.
+Quick start for web development including `gulp`, `Pug`, `Sass`/`Stylus`, `Autoprefixer` and local server with live reload
 
-set NODE_ENV=production для Windows
+The default CSS preprocessor is `Stylus`. To use `Sass`, delete the `styles` folder, rename the `stylesSass` folder to `styles` and switch the appropriate subtask in the` styles` gulp task
+
+On Windows, to switch the current build type (`prod` / `dev`), use
+```bash
+set NODE_ENV=XXX
+```
